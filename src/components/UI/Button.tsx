@@ -1,14 +1,13 @@
+import type { ReactNode } from "react";
 
 interface IProps{
-    children:string;
+    children:ReactNode;
     className?:string
 }
 
 function Button({children,className}:IProps) {
     return (
-        <div>
-            <button className={`${className} p-2 rounded-md text-white`}> {children} </button>
-        </div>
+            <button className={`${className} p-2 text-sm rounded-md text-white flex-1`}> {children} </button>
     )
 }
 

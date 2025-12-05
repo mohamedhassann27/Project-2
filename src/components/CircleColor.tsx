@@ -1,8 +1,8 @@
 
-function CircleColor({className}:{className:string}) {
+function CircleColor({color}:{color:string}) {
     return (
         <div>
-            <p className={`${className} w-5 h-5 rounded-full`} ></p>
+            <p style={{backgroundColor:color}} className={` w-5 h-5 rounded-full`}></p>
         </div>
     )
 }
