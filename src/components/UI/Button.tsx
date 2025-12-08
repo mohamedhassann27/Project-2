@@ -1,13 +1,14 @@
-import type { ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-interface IProps{
+interface IProps extends ButtonHTMLAttributes<HTMLButtonElement>{
     children:ReactNode;
-    className?:string
+    className?:string;
+    width?: 'w-full' | 'w-fit'
 }
 
-function Button({children,className}:IProps) {
+function Button({children, className, width='w-full', ...rest}:IProps) {
     return (
-            <button className={`${className} p-2 text-sm rounded-md text-white flex-1`}> {children} </button>
+            <button className={`${className} ${width} p-2 text-sm rounded-md text-white `} {...rest}> {children} </button>
     )
 }
 
