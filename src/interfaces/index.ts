@@ -11,3 +11,10 @@ export interface IProduct{
     }
 }
 
+export interface IInputForm{
+    id: string,
+    // name: string,
+    name: 'title'| 'description' | 'imageURL'| 'price',
+    label: string,
+    type: string
+}
