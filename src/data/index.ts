@@ -179,3 +179,17 @@ export const inputFormList: IInputForm[]= [
   },
 
 ]
+
+export const productColors=[
+  "#1F8A70",
+  "#820000", 
+  "#FF0032",
+  "#A31ACB", 
+  "#3C2A21", 
+  "#2563eb", 
+  "#FF6E31",
+  "#CB1C8D",
+  "#645CBB",
+  "#13005A",
+  "#84D2C5",
+]

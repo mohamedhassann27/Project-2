@@ -1,11 +1,12 @@
-
 import ProductsList from "./components/ProductsList"
 import Button from "./components/UI/Button"
 import Modal from "./components/UI/Modal"
-import { useState, type ChangeEvent } from "react"
-import { inputFormList } from "./data"
+import { useState, type ChangeEvent, type FormEvent } from "react"
+import { inputFormList, productColors } from "./data"
 import type {IProduct } from "./interfaces"
 import Input from "./components/UI/Input"
+import CircleColor from "./components/CircleColor"
+
 
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
     colors:[],
     category:{name:"", imageURL: ""}
   })
+
+  const [tempColors, setTempColors]= useState<string[]>([])
+  console.log(tempColors);
+  
 
 // [x] handler 
   function open() {
@@ -43,12 +48,30 @@ function App() {
     })
   }
 
+  const submitHandler=(e:FormEvent<HTMLFormElement>)=>{
+    e.preventDefault()
+    close()
+  }
+
 // [x] render
   const renderFormInputsList= inputFormList.map((input)=>(
     <div className="flex flex-col" key={input.id}>
       <label htmlFor={input.id}>{input.label}</label>
       <Input id={input.id} type={input.type} name={input.name} value={product[input.name]} onChange={onChange}/>
     </div>
+  ))
+
+  const colors= productColors.map((color)=>(
+    <CircleColor 
+      key={color} 
+      color={color} 
+      onClick={()=>{
+      if(tempColors.includes(color)){
+        setTempColors(tempColors.filter(item=> item!==color)); 
+        return;
+      }
+      setTempColors((prevColors)=> [...prevColors, color])  
+      }}/>
   ))
 
   return (
@@ -64,12 +87,20 @@ function App() {
 
       <Modal isOpen={isOpen} close={close} title="Add new Product">
 
-        <form className="space-y-3" onSubmit={(e)=>e.preventDefault()}>
+        <form className="space-y-3" onSubmit={submitHandler}>
           {renderFormInputsList}
 
+          <div className="flex gap-2">
+            {colors}
+          </div>
+
+          <div className="flex gap-2 flex-wrap">
+            {tempColors.map((item)=>(<p style={{backgroundColor:item}}>{item}</p>))}
+          </div>
+
           <div className="flex justify-between gap-3">
-            <Button  className="items-center gap-2 rounded-md bg-indigo-600" onClick={close}>Submit</Button>
-            <Button  className="items-center gap-2 rounded-md bg-gray-700" onClick={close}>Cancel</Button>
+            <Button  className="items-center gap-2 rounded-md bg-indigo-600">Submit</Button>
+            <Button  className="items-center gap-2 rounded-md bg-gray-700">Cancel</Button>
           </div>
 
         </form>

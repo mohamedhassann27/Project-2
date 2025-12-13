@@ -8,6 +8,8 @@ interface IProps{
     title?: string;
     children :ReactNode
 }
+
+
 function Modal({isOpen, close,title, children}:IProps) {
 
     return (
